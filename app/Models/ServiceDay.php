@@ -9,6 +9,7 @@ class ServiceDay extends Model
     protected $fillable = [
         'user_id',
         'start',
-        'end'
+        'end',
+        'hours',
     ];
 }

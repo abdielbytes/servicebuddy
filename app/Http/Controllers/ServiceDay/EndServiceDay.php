@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ServiceDay;
-use Inertia\Inertia;
+use Carbon\Carbon;
 
 class EndServiceDay extends Controller
 {
@@ -19,16 +19,24 @@ class EndServiceDay extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
         $user = auth()->user();
-        $service = ServiceDay::where('user_id', $user->id)->firstOrFail();
-        $service->end = $request->input('end');
+
+        // Get the latest active service day
+        $service = ServiceDay::where('user_id', $user->id)
+            ->whereNull('end')
+            ->latest('start')
+            ->firstOrFail();
+
+
+        $service->end = Carbon::parse($request->input('end'));
+
+        $service->hours = round(Carbon::parse($service->start)->diffInMinutes($service->end) / 60, 2);
 
         $service->save();
 
 
-        return Inertia::render('Dashboard', [
-            'success' => true,
-            'message' => 'Service day ended successfully!',
-            'start_time' => $request->end,
-        ]);    }
+
+        return redirect()->back()->with('success', 'Service day ended successfully!');
+    }
 }

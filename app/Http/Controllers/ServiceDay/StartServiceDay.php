@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ServiceDay;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class StartServiceDay extends Controller
 {
@@ -27,10 +27,6 @@ class StartServiceDay extends Controller
             'start' => $request->start,
         ]);
 
-        return Inertia::render('Dashboard', [
-            'success' => true,
-            'message' => 'Service day started successfully!',
-            'start_time' => $request->start,
-        ]);
+        return Redirect::back()->with('success', 'Service day started successfully!');
     }
 }

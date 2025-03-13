@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('service_days', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->date('start')->nullable();
-            $table->date('end')->nullable();
-            $table->time('hours')->nullable();
+            $table->timestamp('start')->nullable();
+            $table->timestamp('end')->nullable();
+            $table->decimal('hours')->nullable();
             $table->timestamps();
         });
     }
