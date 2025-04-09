@@ -6,6 +6,7 @@ import { Head, useForm, usePage } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import { Button } from '@/components/ui/button';
 import ServiceHour from "@/components/ServiceHour.vue";
+import AddReturnVisits  from '@/components/AddReturnVisits.vue';
 
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -33,15 +34,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                 </div>
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-<!--                    <PlaceholderPattern />-->
                     <div class="flex justify-center pt-4 mt-4">
-                        <Button class="bg-blue-500 text-white font-bold py-2 px-4 rounded ml-3" @click="submit('start')">
-                            New Return Visit
-                        </Button>
 
-<!--                        <Button class="bg-green-700 text-white font-bold py-2 px-4 rounded ml-3" @click="submit('end')">-->
-<!--                            Record Bible Study-->
-<!--                        </Button>-->
+                        <AddReturnVisits />
+
                     </div>
 
                 </div>
